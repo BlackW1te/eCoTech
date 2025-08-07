@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giriş Yap</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/login.css" />
+</head>
+
+<body>
+  <header class="cyber-header"> 
+    <a href="../../index.html" class="logo">CYBERKIDS</a>
+    <div class="auth-links"></div>
+  </header>
+
+  <form class="container" id="loginForm"  method="POST" action="login.php">
+    <h1 class="form-title">GİRİŞ YAP</h1>
+
+    <input type="email" name="email" placeholder="E-posta" required />
+    <input type="password" name="sifre" placeholder="Şifre" required />
+    <button type="submit">Giriş Yap</button>
+
+    <div class="links">
+      <a href="forgot-password.html">Şifremi Unuttum</a>
+      <a href="register.html">Hesap Oluştur</a>
+    </div>
+  </form>
+
+  <script>
+     // URL'de success=1 varsa alert göster
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("success") === "1") {
+    alert("Kayıt başarılı! Giriş yapabilirsiniz.");
+  }
+  </script>
+</body>
+</html>

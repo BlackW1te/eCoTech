@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kayıt Ol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/register.css" />
+</head>
+<body>
+  <header class="cyber-header"> 
+    <a href="../../index.html" class="logo">CYBERKIDS</a>
+    <div class="auth-links"></div>
+  </header>
+
+  <form class="container" id="loginForm" method="POST" action="register.php">
+    <h1 class="form-title">KAYIT OL</h1>
+    
+    <input type="text" name="kullanici_adi" placeholder="Kullanıcı Adı:" required />
+    <input type="text" name="isim" placeholder="İsim:" required />
+    <input type="text" name="soyisim" placeholder="Soyisim:" required />
+    <input type="date" name="dogum_tarihi" placeholder="Doğum Tarihi:" id="dogumTarihi" required min="1900-01-01" />
+    <input type="email" name="email" placeholder="E-posta:" required />
+    <input type="tel" id="telefon" name="telefon" placeholder="Telefon Numarası: 5*********" required pattern="[0-9]{10}" maxlength="10" />
+    <p id="telefonUyari" class="uyari"></p>
+    <input type="password" name="sifre" placeholder="Şifre:" required id="sifreInput" />
+    <p id="sifreUyari" class="uyari"></p>
+    <input type="password" name="sifreTekrar" placeholder="Aynı Şifre:" required id="sifreTekrarInput" />
+    <p id="sifreTekrarUyari" class="uyari"></p>
+    <button type="submit">Kayıt Ol</button>
+    <div class="links">
+      <a href="login.html">Hesabın var mı?</a>
+    </div>
+  </form>
+
+  <script src="../../js/register.js"></script>
+</body>
+</html>
