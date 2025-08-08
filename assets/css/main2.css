@@ -1,0 +1,93 @@
+
+:root {
+  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway",  sans-serif;
+  --nav-font: "Ubuntu",  sans-serif;
+}
+
+:root { 
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #5f687b; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #10bc69; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+
+:root {
+  --nav-color: #5f687b;  /* The default color of the main navmenu links */
+  --nav-hover-color: #10bc69; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #5f687b; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #10bc69; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+.light-background {
+  --background-color: #f9f9f9;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
+}
+
+.accent-background {
+  --background-color: #10bc69;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #14eb83;
+  --contrast-color: #ffffff;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 360px; /* Genişlik isteğe göre ayarlanabilir */
+  margin: 0 auto; /* Ortalamak için */
+  gap: 10px; /* Öğeler arası boşluk */
+}
+
+.login-form input,
+.login-form button {
+  border-radius: 50px;
+}
+
+.login-form input {
+  width: 100%;         /* Input'lar formun tamamını kaplar */
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  width: 150px;         /* Buton daha dar */
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  align-self: center; /* Butonu sola hizalar */
+}
+.login-form button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
+
+.login-form .links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
