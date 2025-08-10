@@ -91,3 +91,265 @@
   justify-content: space-between;
   font-size: 14px;
 }
+
+
+
+/* --- (burada senin gönderdiğin main2.css içeriği korunur) --- */
+/* (Ben senin sağladığın main2.css içeriğini değiştirmedim; aşağıya anket stillerini ekliyorum) */
+
+/* ----------------------
+   Survey / Multi-step styles
+   ---------------------- */
+.survey-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--surface-color);
+  padding: 26px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(16, 188, 105, 0.08);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+}
+
+.survey-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 18px;
+}
+
+.survey-title h3 {
+  margin:0;
+  font-size:20px;
+  font-weight:700;
+  color:var(--heading-color);
+}
+
+.survey-sub {
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size:13px;
+}
+
+/* progress bar */
+.survey-progress {
+  height: 10px;
+  background: color-mix(in srgb, var(--default-color), transparent 93%);
+  border-radius: 999px;
+  overflow: hidden;
+  flex: 1 1 auto;
+  margin-left:18px;
+  margin-right:18px;
+}
+
+.survey-progress-bar {
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,var(--accent-color), color-mix(in srgb, var(--accent-color), black 10%));
+  transition: width 420ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* step card */
+.survey-step {
+  display: none;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 360ms ease;
+  will-change: opacity, transform;
+  padding: 18px 10px 4px 10px;
+}
+
+.survey-step.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* question visual */
+.survey-question {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--heading-color);
+}
+
+.survey-hint {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+  margin-bottom: 12px;
+}
+
+/* input style — uyumlu hale getirildi */
+.survey-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  background: var(--surface-color);
+  font-size: 15px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 200ms;
+}
+
+.survey-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 30px rgba(16,188,105,0.08);
+}
+
+/* small inline unit label */
+.survey-unit {
+  margin-left: 8px;
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+  font-weight:600;
+}
+
+/* actions */
+.survey-actions {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top: 18px;
+  align-items:center;
+}
+
+.survey-actions .left,
+.survey-actions .right {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* küçük açık buton */
+.btn-skip {
+  background: transparent;
+  border: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* hata mesajı */
+.survey-error {
+  color: #b00020;
+  font-size: 13px;
+  margin-top: 8px;
+  display:none;
+}
+
+/* sonuç kartı */
+.survey-result {
+  padding: 18px;
+  background: color-mix(in srgb, var(--accent-color), transparent 95%);
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 90%);
+  margin-top: 14px;
+}
+
+.result-total {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+}
+
+.result-breakdown {
+  margin-top: 10px;
+}
+
+.result-breakdown li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--default-color);
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  .survey-wrapper { padding: 18px; }
+  .survey-top { flex-direction: column; gap:8px; align-items:flex-start; }
+  .survey-progress { margin: 8px 0 0 0; width:100% }
+  .survey-actions { flex-direction: column-reverse; align-items:stretch; gap:10px; }
+  .btn-getstarted { width: 100%; text-align:center; }
+}
+
+/* Buton stilleri */
+.btn-back {
+  background-color: #888; /* istersen gri yapabilirsin */
+}
+
+/* Progress bar container */
+.survey-progress-fixed {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface-color);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.survey-progress-track {
+  flex: 1;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.survey-progress-fill {
+  height: 100%;
+  background: var(--accent-color);
+  width: 0%;
+  transition: width 0.35s linear;
+}
+
+.survey-progress-percent {
+  font-weight: bold;
+  color: var(--accent-color);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Slide animations */
+.survey-step {
+  display: none;
+  opacity: 0;
+}
+
+.survey-step.active {
+  display: block;
+}
+
+/* Animasyon sınıfları */
+.slide-in-right {
+  animation: slideInRight 0.35s linear forwards;
+}
+.slide-out-left {
+  animation: slideOutLeft 0.35s linear forwards;
+}
+.slide-in-left {
+  animation: slideInLeft 0.35s linear forwards;
+}
+.slide-out-right {
+  animation: slideOutRight 0.35s linear forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOutLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-100%); opacity: 0; }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(100%); opacity: 0; }
+}

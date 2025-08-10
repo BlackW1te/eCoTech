@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Sarter Page - eNno Bootstrap Template</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Raleway:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File (DO NOT MODIFY) -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- Additional CSS for survey (you may update this file) -->
+  <link href="assets/css/main2.css" rel="stylesheet">
+</head>
+
+<body class="sarter-page-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">eNno</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
+                    class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Dropdown 2</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title (unchanged) -->
+    <div class="page-title">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Sarter Page</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Sarter Page</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Starter Section -> replaced with the multi-step carbon survey -->
+    <section id="starter-section" class="starter-section section">
+      <div class="container section-title" data-aos="fade-up">
+        <span>Karbon Hesaplama</span>
+        <h2>Kurumsal Karbon Ayak İzi Anketi</h2>
+        <p>Her sorudan sonra İleri/Geri ile geçiş yapabilirsiniz. (TÜİK hesap katsayılarını survey.js içindeki
+          EMISSION_FACTORS'a giriniz.)</p>
+      </div>
+
+      <div class="container" data-aos="fade-up">
+        <div class="survey-wrapper" id="carbonSurvey" aria-live="polite">
+
+          <!-- top: title + progress -->
+          <div class="survey-top">
+            <div class="survey-title">
+              <h3>Kurumsal Karbon Hesaplayıcı</h3>
+              <div class="survey-sub">TÜİK katsayılarını girip kesin hesap alabilirsiniz. (Opsiyonel alanlar: su, atık)
+              </div>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="survey-progress" aria-hidden="true">
+                <div class="survey-progress-bar" id="surveyProgressBar" style="width:0%"></div>
+              </div>
+              <div id="surveyStepLabel" style="font-weight:700; color:var(--heading-color)">1 / 20</div>
+            </div>
+          </div>
+
+          <div class="survey-progress-fixed">
+            <div class="survey-progress-track">
+              <div class="survey-progress-fill" id="surveyProgressFill"></div>
+            </div>
+            <div class="survey-progress-percent" id="surveyProgressPercent">0%</div>
+          </div>
+
+          <!-- Steps (one per soru) -->
+          <form id="surveyForm" novalidate>
+            <!-- ÖRNEK: 1. soru -->
+            <div class="survey-step active" data-step="0">
+              <div class="survey-question">Yıllık bazda elektrik tüketimi</div>
+              <input id="q-electricity" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 12500" />
+              <div class="survey-actions">
+                <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+                <button type="button" class="btn-getstarted btn-next">İleri</button>
+              </div>
+              <div class="survey-error">Lütfen bir değer giriniz.</div>
+            </div>
+
+        <!-- 2 -->
+        <div class="survey-step active" data-step="1">
+          <div class="survey-question">Yenilenebilir (Rüzgâr/Güneş/Hidro) yıllık üretim</div>
+          <div class="survey-hint">Kurumsal tesisinizin ürettiği yenilenebilir elektrik (kWh).</div>
+          <input id="q-renewable" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 2000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" >Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 3 -->
+        <div class="survey-step" data-step="2">
+          <div class="survey-question">Yıllık doğal gaz tüketimi</div>
+          <div class="survey-hint">m³ cinsinden giriniz.</div>
+          <input id="q-naturalgas" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 12000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-2">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 4 -->
+        <div class="survey-step" data-step="3">
+          <div class="survey-question">Yıllık LPG tüketimi</div>
+          <div class="survey-hint">litre veya kg (aynı birimde olacak şekilde).</div>
+          <input id="q-lpg" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 350" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-3">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 5 -->
+        <div class="survey-step" data-step="4">
+          <div class="survey-question">Yıllık kızgın yağ / fuel oil tüketimi</div>
+          <div class="survey-hint">litre cinsinden.</div>
+          <input id="q-fueloil" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 1200" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-4">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 6 -->
+        <div class="survey-step" data-step="5">
+          <div class="survey-question">Yıllık kömür tüketimi</div>
+          <div class="survey-hint">ton cinsinden giriniz.</div>
+          <input id="q-coal" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 3" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-5">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 7 -->
+        <div class="survey-step" data-step="6">
+          <div class="survey-question">Merkezi ısıtma tüketimi</div>
+          <div class="survey-hint">kWh veya GJ (birimi yanına belirtin). Şu anda kWh giriniz.</div>
+          <input id="q-centralheat" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 35000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-6">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 8 -->
+        <div class="survey-step" data-step="7">
+          <div class="survey-question">Firmanızın yıl içinde gerçekleştirdiği toplam uçuş sayısı</div>
+          <div class="survey-hint">Gidiş-dönüş = 2 uçuş kabul edilecektir. (Lütfen toplam uçuş sayısını giriniz.)</div>
+          <input id="q-flights" class="survey-input" type="number" min="0" step="1" placeholder="Örn: 10" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-7">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 9 -->
+        <div class="survey-step" data-step="8">
+          <div class="survey-question">Firmanız otomobillerinin yıl içinde kat ettiği toplam mesafe</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-car-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 45000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-8">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 10 -->
+        <div class="survey-step" data-step="9">
+          <div class="survey-question">Firmanız nakliye araçları (kamyonet) toplam mesafe</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-van-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 25000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-9">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 11 -->
+        <div class="survey-step" data-step="10">
+          <div class="survey-question">Firmanız nakliye araçları (kamyon) toplam mesafe</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-truck-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 40000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-10">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 12 -->
+        <div class="survey-step" data-step="11">
+          <div class="survey-question">Firmanız personel servislerinin yıl içinde kat ettiği mesafe</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-service-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 30000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-11">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 13 -->
+        <div class="survey-step" data-step="12">
+          <div class="survey-question">Firmanızda yıl içinde gerçekleşen toplu taşıma (otobüs) mesafesi</div>
+          <div class="survey-hint">km cinsinden (kurumsal rezervasyon, etkinlik vb.).</div>
+          <input id="q-bus-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 15000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-12">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 14 -->
+        <div class="survey-step" data-step="13">
+          <div class="survey-question">Firmanızda yıl içinde gerçekleşen metro mesafesi</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-metro-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 8000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-13">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 15 -->
+        <div class="survey-step" data-step="14">
+          <div class="survey-question">Firmanızda yıl içinde gerçekleşen taksi ulaşımı</div>
+          <div class="survey-hint">km cinsinden.</div>
+          <input id="q-taxi-km" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 1200" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-14">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 16 -->
+        <div class="survey-step" data-step="15">
+          <div class="survey-question">Yıl içinde tüketilen A4 kağıt miktarı</div>
+          <div class="survey-hint">adet cinsinden (opsiyonel: kg girmek isterseniz not ekleyin).</div>
+          <input id="q-a4-count" class="survey-input" type="number" min="0" step="1" placeholder="Örn: 3000" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-15">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 17 -->
+        <div class="survey-step" data-step="16">
+          <div class="survey-question">Yıl içinde kullanılan karton kutu miktarı</div>
+          <div class="survey-hint">adet veya kg (birimi belirtiniz). Şu anda adet giriniz.</div>
+          <input id="q-cardboard" class="survey-input" type="number" min="0" step="1" placeholder="Örn: 120" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-16">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 18 - optional water -->
+        <div class="survey-step" data-step="17">
+          <div class="survey-question">Yıl içindeki toplam su tüketimi (opsiyonel)</div>
+          <div class="survey-hint">m³ cinsinden — opsiyonel, TÜİK doğrudan CO₂ katsayısı vermiyorsa ek rapor için
+            kullanılır.</div>
+          <input id="q-water" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 420" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-17">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 19 - optional waste non-recyclable -->
+        <div class="survey-step" data-step="18">
+          <div class="survey-question">Yıl içinde oluşan geri dönüştürülmeyen atık miktarı (opsiyonel)</div>
+          <div class="survey-hint">kg cinsinden.</div>
+          <input id="q-waste-nonrec" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 1200" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-18">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- 20 - optional waste recyclable -->
+        <div class="survey-step" data-step="19">
+          <div class="survey-question">Yıl içinde oluşan geri dönüştürülebilir atık miktarı (opsiyonel)</div>
+          <div class="survey-hint">kg cinsinden.</div>
+          <input id="q-waste-rec" class="survey-input" type="number" min="0" step="any" placeholder="Örn: 800" />
+          <div class="survey-actions">
+            <button type="button" class="btn-getstarted btn-back" disabled>Geri</button>
+            <button type="button" class="btn-getstarted btn-next">İleri</button>
+          </div>
+          <div class="survey-error" id="err-19">Lütfen geçerli bir sayı girin.</div>
+        </div>
+
+        <!-- RESULT area (hidden until hesapla) -->
+        <div id="surveyResultBlock" class="survey-step" data-step="20" aria-live="polite">
+          <div class="survey-question">Hesaplama Sonucu</div>
+          <div id="resultSummary" class="survey-result" style="display:none;">
+            <div class="result-total" id="resultTotal"></div>
+            <div id="resultNote" class="survey-hint"></div>
+            <ul class="result-breakdown" id="resultBreakdown"></ul>
+          </div>
+
+          <div class="survey-actions">
+            <div class="left"><button type="button" class="btn-getstarted btn-prev">Geri</button></div>
+            <div class="right"><button type="button" id="btnRestart" class="btn-getstarted">Baştan Başla</button></div>
+          </div>
+        </div>
+
+        </form>
+      </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <!-- footer unchanged -->
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-6">
+            <h4>Join Our Newsletter</h4>
+            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top + Preloader (unchanged) -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Survey JS (yeni) -->
+  <script src="assets/js/survey.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
