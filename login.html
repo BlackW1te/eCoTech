@@ -8,10 +8,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -35,13 +31,14 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <img src="assets/img/leaf-logo.png" alt="">
         <h1 class="sitename">eCoTech</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.html">Ana Sayfa</a></li>
-          <li><a href="index.html#about">Hakkında</a></li>
+          <li><a href="index.html#about">CO₂e Hakkında</a></li>
           <li><a href="index.html#services">Hizmetler</a></li>
           <li><a href="register.html">Kayıt ol</a></li>
         </ul>
@@ -60,17 +57,16 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span>Giriş Yap</span>
-        <h2>Giriş Yap</h2>
+        <span>GİRİŞ YAP</span>
+        <h2>GİRİŞ YAP</h2>
       </div><!-- End Section Title -->
 
-      <form class="login-form" id="loginForm" method="POST" action="login.html" data-aos="fade-up">
+      <form class="login-form" id="loginForm" data-aos="fade-up">
         <input type="email" name="email" placeholder="E-posta" required />
-        <input type="password" name="sifre" placeholder="Şifre" required />
+        <input type="password" name="password" placeholder="Şifre" required />
         <button type="submit">Giriş Yap</button>
       
         <div class="links">
-          <a href="forgot-password.html">Şifremi Unuttum</a>
           <a href="register.html">Kayıt Ol</a>
         </div>
       </form>
@@ -99,6 +95,55 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    // Form gönderimi
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      try {
+        console.log('Gönderilen veri:', data);
+        
+        const response = await fetch('api/auth.php?action=login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('Response data:', result);
+        
+        if (result.success) {
+          // Kullanıcı bilgilerini localStorage'a kaydet
+          localStorage.setItem('user', JSON.stringify(result.data.user));
+          
+          // Kullanıcı tipine göre yönlendir
+          if (result.data.user.user_type === 'admin') {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'dashboard.html';
+          }
+        } else {
+          alert('Giriş hatası: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Giriş hatası:', error);
+        alert('Giriş sırasında bir hata oluştu: ' + error.message);
+      }
+    });
+  </script>
 
 </body>
 

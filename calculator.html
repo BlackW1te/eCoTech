@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Karbon Hesaplayıcı - eCoTech</title>
+  <meta name="description" content="Karbon ayak izi hesaplama aracı">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main2.css" rel="stylesheet">
+
+  <style>
+    .calculator-card {
+      background: var(--surface-color);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: var(--heading-color);
+      margin-bottom: 8px;
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 12px 15px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.2rem rgba(16, 188, 105, 0.25);
+    }
+    
+    .input-group-text {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 0 10px 10px 0;
+    }
+    
+    .btn-calculate {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-calculate:hover {
+      background: color-mix(in srgb, var(--accent-color), black 10%);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .result-card {
+      background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color), black 10%));
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .result-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .result-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .breakdown-item {
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .breakdown-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .breakdown-value {
+      font-size: 1.2rem;
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    
+    .step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9ecef;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .step.active {
+      background: var(--accent-color);
+      color: white;
+    }
+    
+    .step.completed {
+      background: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="calculator-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <h1 class="sitename">eCoTech</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="history.html">Geçmiş</a></li>
+          <li class="dropdown"><a href="#"><span id="userName">Kullanıcı</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#" onclick="logout()">Çıkış Yap</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+    
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>Karbon Hesaplayıcı</span>
+        <h2>Karbon Ayak İzinizi Hesaplayın</h2>
+        <p>Günlük faaliyetlerinizin çevreye olan etkisini öğrenin</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        
+        <!-- Adım Göstergesi -->
+        <div class="step-indicator">
+          <div class="step active" id="step1">1</div>
+          <div class="step" id="step2">2</div>
+          <div class="step" id="step3">3</div>
+        </div>
+
+        <!-- Hesaplama Formu -->
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="calculator-card">
+              <form id="carbonForm">
+                
+                <!-- Adım 1: Enerji Kullanımı -->
+                <div id="step1Content">
+                  <h4 class="mb-4"><i class="bi bi-lightning-charge me-2"></i>Enerji Kullanımı</h4>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Aylık Elektrik Tüketimi (kWh)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="electricity" name="electricity" min="0" step="0.1" placeholder="Örn: 500">
+                      <span class="input-group-text">kWh</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Aylık Doğal Gaz Tüketimi (m³)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="natural_gas" name="natural_gas" min="0" step="0.1" placeholder="Örn: 100">
+                      <span class="input-group-text">m³</span>
+                    </div>
+                  </div>
+                  
+                  <div class="text-end">
+                    <button type="button" class="btn btn-calculate" onclick="nextStep(2)">İleri <i class="bi bi-arrow-right ms-2"></i></button>
+                  </div>
+                </div>
+
+                <!-- Adım 2: Su ve Atık -->
+                <div id="step2Content" style="display: none;">
+                  <h4 class="mb-4"><i class="bi bi-droplet me-2"></i>Su ve Atık</h4>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Aylık Su Tüketimi (m³)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="water" name="water" min="0" step="0.1" placeholder="Örn: 20">
+                      <span class="input-group-text">m³</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Aylık Atık Üretimi (kg)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="waste" name="waste" min="0" step="0.1" placeholder="Örn: 50">
+                      <span class="input-group-text">kg</span>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary" onclick="prevStep(1)"><i class="bi bi-arrow-left me-2"></i>Geri</button>
+                    <button type="button" class="btn btn-calculate" onclick="nextStep(3)">İleri <i class="bi bi-arrow-right ms-2"></i></button>
+                  </div>
+                </div>
+
+                <!-- Adım 3: Ulaşım -->
+                <div id="step3Content" style="display: none;">
+                  <h4 class="mb-4"><i class="bi bi-car-front me-2"></i>Ulaşım</h4>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Aylık Yakıt Tüketimi (Litre)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="transportation" name="transportation" min="0" step="0.1" placeholder="Örn: 80">
+                      <span class="input-group-text">Litre</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">İş Seyahatleri (km/ay)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="business_travel" name="business_travel" min="0" step="0.1" placeholder="Örn: 200">
+                      <span class="input-group-text">km</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Çalışan İşe Gidiş (km/ay)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="employee_commute" name="employee_commute" min="0" step="0.1" placeholder="Örn: 300">
+                      <span class="input-group-text">km</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Kağıt Kullanımı (kg/ay)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="paper_usage" name="paper_usage" min="0" step="0.1" placeholder="Örn: 10">
+                      <span class="input-group-text">kg</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Diğer Emisyonlar (kg CO₂e/ay)</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="other_emissions" name="other_emissions" min="0" step="0.1" placeholder="Örn: 50">
+                      <span class="input-group-text">kg</span>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Notlar (İsteğe bağlı)</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="3" placeholder="Hesaplama hakkında notlarınız..."></textarea>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary" onclick="prevStep(2)"><i class="bi bi-arrow-left me-2"></i>Geri</button>
+                    <button type="submit" class="btn btn-calculate">
+                      <i class="bi bi-calculator me-2"></i>Hesapla
+                    </button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sonuç Kartı -->
+        <div id="resultCard" class="row justify-content-center" style="display: none;">
+          <div class="col-lg-8">
+            <div class="result-card">
+              <div class="result-number" id="totalResult">0</div>
+              <div class="result-label">kg CO₂e / Ay</div>
+              <p class="mt-3">Bu, aylık karbon ayak izinizdir.</p>
+              
+              <div class="row mt-4">
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Elektrik</div>
+                    <div class="breakdown-value" id="electricityResult">0 kg</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Doğal Gaz</div>
+                    <div class="breakdown-value" id="gasResult">0 kg</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Su</div>
+                    <div class="breakdown-value" id="waterResult">0 kg</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Atık</div>
+                    <div class="breakdown-value" id="wasteResult">0 kg</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Ulaşım</div>
+                    <div class="breakdown-value" id="transportResult">0 kg</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="breakdown-item">
+                    <div class="breakdown-label">Diğer</div>
+                    <div class="breakdown-value" id="otherResult">0 kg</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <button class="btn btn-light me-3" onclick="saveCalculation()">
+                  <i class="bi bi-save me-2"></i>Kaydet
+                </button>
+                <button class="btn btn-light" onclick="resetForm()">
+                  <i class="bi bi-arrow-clockwise me-2"></i>Yeni Hesaplama
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    let currentStep = 1;
+    let calculationResult = null;
+
+    // Kullanıcı kontrolü
+    function checkAuth() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+      
+      document.getElementById('userName').textContent = user.first_name + ' ' + user.last_name;
+    }
+
+    // Sonraki adım
+    function nextStep(step) {
+      if (validateCurrentStep()) {
+        showStep(step);
+        currentStep = step;
+        updateStepIndicator();
+      }
+    }
+
+    // Önceki adım
+    function prevStep(step) {
+      showStep(step);
+      currentStep = step;
+      updateStepIndicator();
+    }
+
+    // Adım göster
+    function showStep(step) {
+      document.getElementById('step1Content').style.display = step === 1 ? 'block' : 'none';
+      document.getElementById('step2Content').style.display = step === 2 ? 'block' : 'none';
+      document.getElementById('step3Content').style.display = step === 3 ? 'block' : 'none';
+    }
+
+    // Adım göstergesini güncelle
+    function updateStepIndicator() {
+      for (let i = 1; i <= 3; i++) {
+        const stepElement = document.getElementById(`step${i}`);
+        if (i < currentStep) {
+          stepElement.className = 'step completed';
+        } else if (i === currentStep) {
+          stepElement.className = 'step active';
+        } else {
+          stepElement.className = 'step';
+        }
+      }
+    }
+
+    // Mevcut adımı doğrula
+    function validateCurrentStep() {
+      if (currentStep === 1) {
+        const electricity = document.getElementById('electricity').value;
+        const naturalGas = document.getElementById('natural_gas').value;
+        return electricity || naturalGas;
+      }
+      return true;
+    }
+
+    // Form gönderimi
+    document.getElementById('carbonForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // Sayısal değerlere çevir
+      Object.keys(data).forEach(key => {
+        if (key !== 'notes') {
+          data[key] = parseFloat(data[key]) || 0;
+        }
+      });
+      
+      try {
+        const response = await fetch('api/carbon_calculation.php?action=calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          calculationResult = result.data;
+          showResult(result.data);
+        } else {
+          alert('Hesaplama hatası: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Hesaplama hatası:', error);
+        alert('Hesaplama sırasında bir hata oluştu.');
+      }
+    });
+
+    // Sonucu göster
+    function showResult(data) {
+      document.getElementById('totalResult').textContent = Math.round(data.total);
+      document.getElementById('electricityResult').textContent = Math.round(data.breakdown.electricity || 0) + ' kg';
+      document.getElementById('gasResult').textContent = Math.round(data.breakdown.natural_gas || 0) + ' kg';
+      document.getElementById('waterResult').textContent = Math.round(data.breakdown.water || 0) + ' kg';
+      document.getElementById('wasteResult').textContent = Math.round(data.breakdown.waste || 0) + ' kg';
+      document.getElementById('transportResult').textContent = Math.round(data.breakdown.transportation || 0) + ' kg';
+      document.getElementById('otherResult').textContent = Math.round(data.breakdown.other || 0) + ' kg';
+      
+      document.getElementById('resultCard').style.display = 'block';
+      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Hesaplamayı kaydet
+    async function saveCalculation() {
+      if (!calculationResult) return;
+      
+      const formData = new FormData(document.getElementById('carbonForm'));
+      const data = Object.fromEntries(formData);
+      
+      Object.keys(data).forEach(key => {
+        if (key !== 'notes') {
+          data[key] = parseFloat(data[key]) || 0;
+        }
+      });
+      
+      try {
+        const response = await fetch('api/carbon_calculation.php?action=save', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          alert('Hesaplama başarıyla kaydedildi!');
+          window.location.href = 'dashboard.html';
+        } else {
+          alert('Kaydetme hatası: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Kaydetme hatası:', error);
+        alert('Kaydetme sırasında bir hata oluştu.');
+      }
+    }
+
+    // Formu sıfırla
+    function resetForm() {
+      document.getElementById('carbonForm').reset();
+      document.getElementById('resultCard').style.display = 'none';
+      showStep(1);
+      currentStep = 1;
+      updateStepIndicator();
+      calculationResult = null;
+    }
+
+    // Çıkış yap
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    }
+
+    // Sayfa yüklendiğinde
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuth();
+    });
+  </script>
+
+</body>
+
+</html> 

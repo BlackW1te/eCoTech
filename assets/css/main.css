@@ -1743,3 +1743,9 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+.img-main{
+  max-width: 60%;
+  height: auto;
+  margin-left: 180px;
+}

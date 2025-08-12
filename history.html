@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Geçmiş Hesaplamalar - eCoTech</title>
+  <meta name="description" content="Karbon ayak izi geçmiş hesaplamaları">
+  <meta name="keywords" content="">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main2.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="history-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <img src="assets/img/leaf-logo.png" alt="">
+        <h1 class="sitename">eCoTech</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="calculator.html">Hesaplayıcı</a></li>
+          <li class="dropdown"><a href="#"><span id="userName">Kullanıcı</span> <i
+                class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#" onclick="logout()">Çıkış Yap</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- History Section -->
+    <section id="history" class="history section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span>Geçmiş Hesaplamalar</span>
+        <h2>Hesaplama Geçmişiniz</h2>
+        <p>Karbon ayak izi hesaplamalarınızı takip edin ve trendleri analiz edin</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- İstatistik Kartları -->
+        <div class="row mb-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number" id="totalCalculations">0</div>
+              <div class="stat-label">Toplam Hesaplama</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number" id="avgFootprint">0</div>
+              <div class="stat-label">Ortalama CO₂e (kg)</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number" id="totalFootprint">0</div>
+              <div class="stat-label">Toplam CO₂e (kg)</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-card">
+              <div class="stat-number" id="monthlyAvg">0</div>
+              <div class="stat-label">Aylık Ortalama</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtreler -->
+        <div class="filter-section">
+          <div class="row align-items-center">
+            <div class="col-md-3">
+              <label class="form-label">Başlangıç Tarihi</label>
+              <input type="date" class="form-control" id="startDate">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Bitiş Tarihi</label>
+              <input type="date" class="form-control" id="endDate">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Sıralama</label>
+              <select class="form-control" id="sortOrder">
+                <option value="desc">En Yeni</option>
+                <option value="asc">En Eski</option>
+                <option value="footprint_desc">CO₂e Azalan</option>
+                <option value="footprint_asc">CO₂e Artan</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-filter" onclick="applyFilters()">
+                <i class="bi bi-funnel me-2"></i>Filtrele
+              </button>
+              <button class="btn btn-outline-secondary ms-2" onclick="resetFilters()">
+                <i class="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Menüsü -->
+        <ul class="nav nav-tabs" id="historyTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="table-tab" data-bs-toggle="tab" data-bs-target="#table" type="button"
+              role="tab">
+              <i class="bi bi-table me-2"></i>Tablo Görünümü
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button"
+              role="tab">
+              <i class="bi bi-graph-up me-2"></i>Grafik Görünümü
+            </button>
+          </li>
+        </ul>
+
+        <!-- Tab İçerikleri -->
+        <div class="tab-content" id="historyTabContent">
+
+          <!-- Tablo Görünümü -->
+          <div class="tab-pane fade show active" id="table" role="tabpanel">
+            <div class="history-card">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Tarih</th>
+                      <th>Toplam CO₂e</th>
+                      <th>Elektrik</th>
+                      <th>Doğal Gaz</th>
+                      <th>Su</th>
+                      <th>Atık</th>
+                      <th>Ulaşım</th>
+                      <th>Notlar</th>
+                      <th>İşlemler</th>
+                    </tr>
+                  </thead>
+                  <tbody id="calculationsTable">
+                    <!-- JavaScript ile doldurulacak -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Sayfalama -->
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                  <span id="paginationInfo">0-0 / 0 kayıt</span>
+                </div>
+                <div>
+                  <button class="btn btn-outline-secondary btn-sm" onclick="previousPage()" id="prevBtn" disabled>
+                    <i class="bi bi-chevron-left"></i> Önceki
+                  </button>
+                  <span class="mx-2" id="pageInfo">Sayfa 1</span>
+                  <button class="btn btn-outline-secondary btn-sm" onclick="nextPage()" id="nextBtn">
+                    Sonraki <i class="bi bi-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafik Görünümü -->
+          <div class="tab-pane fade" id="chart" role="tabpanel">
+            <div class="history-card">
+              <h4 class="mb-4">Karbon Ayak İzi Trendi</h4>
+              <div class="chart-container">
+                <canvas id="historyChart"></canvas>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="history-card">
+                  <h5 class="mb-3">Kategori Dağılımı</h5>
+                  <canvas id="pieChart"></canvas>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="history-card">
+                  <h5 class="mb-3">Aylık Ortalama</h5>
+                  <canvas id="monthlyChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/history.js"></script>
+
+
+</body>
+
+</html>

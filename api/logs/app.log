@@ -1,0 +1,28 @@
+[2025-08-11 08:04:35] [ERROR] Giriş hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:04:46] [ERROR] Giriş hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:05:35] [ERROR] Kayıt hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:06:12] [ERROR] Kayıt hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:08:06] [ERROR] Giriş hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:08:32] [ERROR] Giriş hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:11:33] [ERROR] Giriş hatası: SQLSTATE[HY000]: General error: 1 no such table: users
+[2025-08-11 08:12:46] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-11 08:13:22] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-11 08:13:47] [LOGIN] Kullanıcı giriş yaptı: demo@example.com
+[2025-08-11 08:16:32] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-11 08:17:07] [LOGIN] Kullanıcı giriş yaptı: demo@example.com
+[2025-08-11 08:18:18] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-11 08:19:13] [LOGIN] Kullanıcı giriş yaptı: demo@example.com
+[2025-08-11 12:37:57] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-12 07:38:15] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-12 07:44:59] [REGISTER] Yeni kullanıcı kaydı: emreisgoren@gmail.com
+[2025-08-12 07:45:07] [LOGIN] Kullanıcı giriş yaptı: emreisgoren@gmail.com
+[2025-08-12 07:45:38] [LOGIN] Kullanıcı giriş yaptı: emreisgoren@gmail.com
+[2025-08-12 07:47:09] [CALCULATION] Karbon hesaplaması kaydedildi: Kullanıcı ID 3, Hesaplama ID 4
+[2025-08-12 07:47:49] [CALCULATION] Karbon hesaplaması kaydedildi: Kullanıcı ID 3, Hesaplama ID 5
+[2025-08-12 07:48:30] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-12 08:03:01] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-12 12:03:20] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com
+[2025-08-12 12:04:10] [LOGIN] Kullanıcı giriş yaptı: emreisgoren@gmail.com
+[2025-08-12 13:32:32] [LOGIN] Kullanıcı giriş yaptı: emreisgoren@gmail.com
+[2025-08-12 13:33:35] [LOGIN] Kullanıcı giriş yaptı: emreisgoren@gmail.com
+[2025-08-12 13:33:59] [LOGIN] Kullanıcı giriş yaptı: admin@ecotech.com

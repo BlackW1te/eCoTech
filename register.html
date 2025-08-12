@@ -8,10 +8,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -35,6 +31,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <img src="assets/img/leaf-logo.png" alt="">
         <h1 class="sitename">eCoTech</h1>
       </a>
 
@@ -63,19 +60,20 @@
         <h2>Kayıt Ol!</h2>
       </div><!-- End Section Title -->
 
-      <form class="login-form" id="loginForm" method="POST" action="login.html" data-aos="fade-up">
-        <input type="text" name="kullanici_adi" placeholder="Kullanıcı Adı:" required="">
-        <input type="text" name="isim" placeholder="İsim:" required="">
-        <input type="text" name="soyisim" placeholder="Soyisim:" required="">
-        <input type="date" name="dogum_tarihi" placeholder="Doğum Tarihi:" id="dogumTarihi" required="" min="1900-01-01">
+     <form class="login-form" id="registerForm" data-aos="fade-up">
+        <input type="text" name="username" placeholder="Kullanıcı Adı:" required="">
+        <input type="text" name="first_name" placeholder="İsim:" required="">
+        <input type="text" name="last_name" placeholder="Soyisim:" required="">
+        <input type="date" name="birth_date" placeholder="Doğum Tarihi:" id="birthDate" required="" min="1900-01-01">
         <input type="email" name="email" placeholder="E-posta:" required="">
-        <input type="tel" id="telefon" name="telefon" placeholder="Telefon Numarası: 5*********" required=""
+        <input type="tel" id="phone" name="phone" placeholder="Telefon Numarası: 5*********" required=""
           pattern="[0-9]{10}" maxlength="10">
-        <p id="telefonUyari" class="uyari"></p>
-        <input type="password" name="sifre" placeholder="Şifre:" required="" id="sifreInput">
-        <p id="sifreUyari" class="uyari"></p>
-        <input type="password" name="sifreTekrar" placeholder="Aynı Şifre:" required="" id="sifreTekrarInput">
-        <p id="sifreTekrarUyari" class="uyari"></p>
+        <p id="phoneWarning" class="warning"></p>
+        <input type="text" name="company_name" placeholder="Şirket Adı (İsteğe bağlı):">
+        <input type="password" name="password" placeholder="Şifre:" required="" id="passwordInput">
+        <p id="passwordWarning" class="warning"></p>
+        <input type="password" name="password_confirm" placeholder="Şifre Tekrar:" required="" id="passwordConfirmInput">
+        <p id="passwordConfirmWarning" class="warning"></p>
         <button type="submit">Kayıt Ol</button>
         <div class="links">
           <a href="login.html">Hesabın var mı?</a>
@@ -105,6 +103,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/form.js"></script>
 
 </body>
 
